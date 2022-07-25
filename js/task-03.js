@@ -12,16 +12,19 @@ const images = [
     alt: 'Group of Horses Running',
   },
 ];
-const galleryRef = document.querySelector('.gallery')
 
-const imgRef = images.map(({ url, alt }) => `<li style="list-style: none;"><img src="${url}" alt="${alt}" width=100% /></li>`)
-  .join("");
+const refs = {
+  gallery: document.querySelector(".gallery"),
+};
 
-galleryRef.insertAdjacentHTML("afterbegin", imgRef);
-// .........///
-galleryRef.style.display = 'flex';
-galleryRef.style.gap = '10px';
-galleryRef.style.flexWrap = 'no-wrap';
-galleryRef.style.justifyContent = 'center';
-galleryRef.style.alignItems = 'center';
-galleryRef.style.width = '100%';
+const createGalleryItemMurkup = (images) => {
+  return images
+    .map(({ url, alt }) => {
+      return `<li class="gallery__item"><img class="gallery__img" src=${url} alt=${alt}></li>`;
+    })
+    .join("");
+};
+
+const createdGalleryItem = createGalleryItemMurkup(images);
+
+refs.gallery.insertAdjacentHTML("afterbegin", createdGalleryItem);
